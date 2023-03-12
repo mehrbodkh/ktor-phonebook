@@ -14,13 +14,13 @@ import com.mehbod.model.User as UserModel
 class UserDataSource(database: Database) {
     object Users : IntIdTable() {
         val username = varchar("username", length = 50)
-        val password = text("password")
+        val passwordHash = text("password_hash")
     }
 
     class User(id: EntityID<Int>) : IntEntity(id) {
         companion object: IntEntityClass<User>(Users)
         var username by Users.username
-        var password by Users.password
+        var passwordHash by Users.passwordHash
     }
 
     init {
@@ -32,19 +32,18 @@ class UserDataSource(database: Database) {
     private suspend fun <T> dbQuery(block: suspend () -> T): T =
         newSuspendedTransaction(Dispatchers.IO) { block() }
 
-
-    suspend fun addUser(user: UserModel) {
+    suspend fun addUser(username: String, passwordHash: String) {
         dbQuery {
             User.new {
-                username = user.username
-                password = user.password
+                this.username = username
+                this.passwordHash = passwordHash
             }
         }
     }
 
     suspend fun getAllUsers() = dbQuery {
         User.all().map {
-            UserModel(it.username, it.password)
+            UserModel(it.username, it.passwordHash)
         }
     }
 }
