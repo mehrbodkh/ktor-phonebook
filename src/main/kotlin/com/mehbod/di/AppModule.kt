@@ -1,9 +1,11 @@
 package com.mehbod.di
 
 import com.mehbod.data.UserDataSource
+import com.mehbod.services.UserService
 import com.zaxxer.hikari.HikariDataSource
 import io.ktor.server.config.*
 import org.jetbrains.exposed.sql.Database
+import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
 val appModule = module {
@@ -30,5 +32,6 @@ val appModule = module {
         )
     }
 
-    single { UserDataSource(get()) }
+    singleOf(::UserDataSource)
+    singleOf(::UserService)
 }

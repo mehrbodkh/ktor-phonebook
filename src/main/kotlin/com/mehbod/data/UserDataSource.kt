@@ -18,7 +18,8 @@ class UserDataSource(database: Database) {
     }
 
     class User(id: EntityID<Int>) : IntEntity(id) {
-        companion object: IntEntityClass<User>(Users)
+        companion object : IntEntityClass<User>(Users)
+
         var username by Users.username
         var passwordHash by Users.passwordHash
     }
@@ -32,13 +33,15 @@ class UserDataSource(database: Database) {
     private suspend fun <T> dbQuery(block: suspend () -> T): T =
         newSuspendedTransaction(Dispatchers.IO) { block() }
 
-    suspend fun addUser(username: String, passwordHash: String) {
-        dbQuery {
-            User.new {
-                this.username = username
-                this.passwordHash = passwordHash
-            }
+    suspend fun addUser(username: String, passwordHash: String) = dbQuery {
+        User.new {
+            this.username = username
+            this.passwordHash = passwordHash
         }
+    }
+
+    suspend fun fetchUser(username: String) = dbQuery {
+        User.find { Users.username eq username }.firstOrNull()
     }
 
     suspend fun getAllUsers() = dbQuery {
