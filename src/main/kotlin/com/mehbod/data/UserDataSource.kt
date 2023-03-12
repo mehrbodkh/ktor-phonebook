@@ -11,7 +11,7 @@ import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransacti
 import org.jetbrains.exposed.sql.transactions.transaction
 import com.mehbod.model.User as UserModel
 
-class UserRepository(database: Database) {
+class UserDataSource(database: Database) {
     object Users : IntIdTable() {
         val username = varchar("username", length = 50)
         val password = text("password")

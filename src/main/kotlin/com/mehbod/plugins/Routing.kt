@@ -1,6 +1,6 @@
 package com.mehbod.plugins
 
-import com.mehbod.data.UserRepository
+import com.mehbod.data.UserDataSource
 import com.mehbod.model.User
 import io.ktor.server.application.*
 import io.ktor.server.plugins.autohead.*
@@ -12,7 +12,7 @@ import org.koin.ktor.ext.inject
 fun Application.configureRouting() {
     install(AutoHeadResponse)
 
-    val repository: UserRepository by inject()
+    val repository: UserDataSource by inject()
 
     routing {
         route("/addUser") {
