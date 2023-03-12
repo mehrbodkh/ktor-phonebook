@@ -1,7 +1,9 @@
 package com.mehbod.di
 
 import com.mehbod.data.UserDataSource
+import com.mehbod.data.ContactsDataSource
 import com.mehbod.services.UserService
+import com.mehbod.services.ContactsService
 import com.zaxxer.hikari.HikariDataSource
 import io.ktor.server.config.*
 import org.jetbrains.exposed.sql.Database
@@ -33,5 +35,7 @@ val appModule = module {
     }
 
     singleOf(::UserDataSource)
+    singleOf(::ContactsDataSource)
     singleOf(::UserService)
+    singleOf(::ContactsService)
 }

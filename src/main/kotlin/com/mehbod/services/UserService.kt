@@ -65,4 +65,6 @@ class UserService(
             SignUpResponse(error = "Username or password is wrong.")
         }
     }
+
+    suspend fun findUser(username: String) = userDataSource.fetchUser(username)
 }
