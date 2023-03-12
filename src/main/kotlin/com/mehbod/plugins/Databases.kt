@@ -7,6 +7,7 @@ import io.ktor.server.response.*
 import kotlinx.coroutines.*
 import java.sql.*
 import io.ktor.server.application.*
+import io.ktor.server.routing.*
 
 fun Application.configureDatabases() {
     val database = Database.connect(
@@ -17,5 +18,6 @@ fun Application.configureDatabases() {
         )
     
     routing {
+
     }
 }
