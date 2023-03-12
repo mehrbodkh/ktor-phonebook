@@ -1,5 +1,6 @@
 package com.mehbod
 
+import com.mehbod.di.configureKoin
 import io.ktor.server.application.*
 import com.mehbod.plugins.*
 
@@ -8,8 +9,8 @@ fun main(args: Array<String>): Unit =
 
 @Suppress("unused")
 fun Application.module() {
+    configureKoin()
     configureSerialization()
-    configureDatabases()
     configureMonitoring()
     configureSecurity()
     configureRouting()
