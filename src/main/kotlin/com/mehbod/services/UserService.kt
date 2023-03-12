@@ -45,6 +45,15 @@ class UserService(
         }
     }
 
+    suspend fun canLogin(user: User): Boolean {
+        return userDataSource.fetchUser(user.username)?.let {
+            val verified = verify(user.password, it.passwordHash)
+            verified
+        } ?: run {
+            false
+        }
+    }
+
     suspend fun login(user: User): SignUpResponse {
         return userDataSource.fetchUser(user.username)?.let {
             if (verify(user.password, it.passwordHash)) {

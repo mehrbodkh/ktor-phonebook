@@ -9,7 +9,6 @@ import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransaction
 import org.jetbrains.exposed.sql.transactions.transaction
-import com.mehbod.model.User as UserModel
 
 class UserDataSource(database: Database) {
     object Users : IntIdTable() {
@@ -45,8 +44,6 @@ class UserDataSource(database: Database) {
     }
 
     suspend fun getAllUsers() = dbQuery {
-        User.all().map {
-            UserModel(it.username, it.passwordHash)
-        }
+        User.all().map { it.username }
     }
 }
