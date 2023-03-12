@@ -13,7 +13,7 @@ import com.mehbod.model.User as UserModel
 
 class UserDataSource(database: Database) {
     object Users : IntIdTable() {
-        val username = varchar("username", length = 50)
+        val username = varchar("username", length = 50).uniqueIndex()
         val passwordHash = text("password_hash")
     }
 

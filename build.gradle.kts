@@ -6,6 +6,7 @@ val h2_version : String by project
 val postgres_version : String by project
 val koin_version : String by project
 val bcrypt_version : String by project
+val hikaricp_version : String by project
 
 plugins {
     kotlin("jvm") version "1.8.10"
@@ -46,6 +47,7 @@ dependencies {
     implementation("io.insert-koin:koin-ktor:$koin_version")
     implementation("io.insert-koin:koin-logger-slf4j:$koin_version")
     implementation("at.favre.lib:bcrypt:$bcrypt_version")
+    implementation("com.zaxxer:HikariCP:$hikaricp_version")
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
 }
