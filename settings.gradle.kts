@@ -1,0 +1,1 @@
+rootProject.name = "com.mehbod.ktor-phonebook"
